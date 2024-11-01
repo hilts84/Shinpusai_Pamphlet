@@ -38,14 +38,14 @@
             document.getElementById('photo').src = photoSrc;
         }
 
-        function onScrollRight() {
+        function onScrollLeft() {
             if (currentPage < totalPages) {
                 currentPage++;
                 console.log("RRR")
                 updatePhoto();
             }
         }
-        function onScrollLeft() {
+        function onScrollRight() {
             if (currentPage > 1) {
                 currentPage--;
                 console.log("LLL")
