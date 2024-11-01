@@ -65,13 +65,13 @@
             if (Math.abs(diffX) > 50) {
                 if (diffX > 0) {
                     // スワイプ左
-                    if (currentPage > totalPages) {
+                    if (currentPage > 1) {
                         currentPage--
                         updatePage();
                     }
                 } else if (diffX < -50){
                     // スワイプ右
-                    if (currentPage < 1) {
+                    if (currentPage < totalPages) {
                         currentPage++
                         updatePage();
                     }
