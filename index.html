@@ -24,9 +24,6 @@
     </style>
 </head>
 <body>
-
-    <h1>新風祭パンフレット</h1>
-
     <!-- 画像を表示するエリア -->
     <img id="photo" src="" alt="写真表示" />
 
@@ -38,6 +35,7 @@
         let currentPage = 1;   // 初期ページ
 
         function updatePhoto() {
+            position: fixed;
             const formattedPage = String(currentPage).padStart(2, '0');
             const photoSrc = `https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/${formattedPage}.webp`;
             document.getElementById('photo').src = photoSrc;
