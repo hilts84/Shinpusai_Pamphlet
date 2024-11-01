@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width+device-width, initial-scale 1.0">
     <title>新風祭パンフレット</title>
+    <style>
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>新風祭パンフレット</h1>
@@ -14,6 +22,12 @@
     <script>
         const totalPages = 64; // 全ページ数
         let currentPage = 1;   // 初期ページ
+
+        function onScroll() {
+            console.log("GOT IT");
+        }
+
+        window.addEventListener("scroll", onScroll);
     </script>
 </body>
 </html>
