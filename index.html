@@ -10,24 +10,16 @@
             font-family: Arial, sans-serif;
         }
 
-        .gallery {
-            overflow-x: auto;
-            width: 100%;
-            position: relative;
-        }
-
-        .gallery-inner {
+        .section {
             display: flex;
-            scroll-snap-align: start;
-            scroll-snap-stop: normal;
+            overflow-x: auto;
             scroll-snap-type: x mandatory;
-            transition: transform 0.3s ease;
         }
 
-        .gallery img {
-            max-width: 100%; /* 画像の最大幅を指定 */
-            
+        .section__item {
+            scroll-snap-align: start;
         }
+
     </style>
 </head>
 <body>
