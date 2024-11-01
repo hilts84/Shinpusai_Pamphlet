@@ -3,77 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新風祭パンフレット</title>
+    <title>スワイプで切り替えできる写真ギャラリー</title>
     <style>
         body {
-            display: flex;
-            overflow-x: scroll;
-            scroll-snap-type: x mandatory;
-            overflow: hidden;
-            
-            scroll-snap-align: center;
+            margin: 0;
             font-family: Arial, sans-serif;
-            width: 100%;
-            height: 100%;
-
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px;
+
+        .gallery {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .gallery-wrapper {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img {
+            width: 100%;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body>
-    <!-- 画像を表示するエリア -->
-    <img id="photo" src="" alt="写真表示" />
-
-    <p id="pageNumber"></p>
-
+    <div class="gallery">
+        <div class="gallery-wrapper">
+            <img src="C:\Users\hitsublab\Desktop\shinpusai\webp\01.webp" alt="Image 1">
+            <img src="C:\Users\hitsublab\Desktop\shinpusai\webp\02.webp" alt="Image 2">
+            <img src="C:\Users\hitsublab\Desktop\shinpusai\webp\03.webp" alt="Image 3">
+            <img src="C:\Users\hitsublab\Desktop\shinpusai\webp\04.webp" alt="Image 4">
+        </div>
+    </div>
     <script>
-        let lastScrollLeft = 0;
-        const totalPages = 64; // 全ページ数
-        let currentPage = 1;   // 初期ページ
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.gallery img');
 
-        function updatePhoto() {
-            const formattedPage = String(currentPage).padStart(2, '0');
-            const photoSrc = `https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/${formattedPage}.webp`;
-            document.getElementById('photo').src = photoSrc;
+        function updateGallery() {
+            const offset = -currentIndex * 100;
+            document.querySelector('.gallery-wrapper').style.transform = `translateX(${offset}%)`;
         }
 
-        function onScrollLeft() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                console.log("RRR")
-                updatePhoto();
+        let startX = 0;
+
+        function touchStart(event) {
+            startX = event.touches[0].clientX;
+        }
+
+        function touchMove(event) {
+            const moveX = event.touches[0].clientX;
+            const diffX = startX - moveX;
+
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    // スワイプ左
+                    currentIndex = (currentIndex + 1) % images.length;
+                } else {
+                    // スワイプ右
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                }
+                updateGallery();
+                document.removeEventListener('touchmove', touchMove);
             }
         }
-        function onScrollRight() {
-            if (currentPage > 1) {
-                currentPage--;
-                console.log("LLL")
-                updatePhoto();
-            }
-        }
-        window.addEventListener('scroll', () => {
-        const scrollLeft = window.scrollX;
 
-        if (scrollLeft > lastScrollLeft) {
-            // 右にスクロール
-            onScrollRight();
-        } else {
-            // 左にスクロール
-            onScrollLeft();
-        }
-
-        lastScrollLeft = scrollLeft;
-
-        // 初期ページを設定
-        
-        });
-
-        updatePhoto();
+        document.querySelector('.gallery').addEventListener('touchstart', touchStart);
+        document.querySelector('.gallery').addEventListener('touchmove', touchMove);
     </script>
-
 </body>
 </html>
