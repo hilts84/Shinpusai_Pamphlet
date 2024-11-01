@@ -3,62 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>画像スワイプギャラリー</title>
+    <title>写真ビューア</title>
     <style>
         body {
-            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             font-family: Arial, sans-serif;
         }
-
-        .gallery {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .gallery img {
-            width: 100%;
-            max-width: 300px; /* 画像の最大幅を指定 */
+        img {
+            max-width: 80%;
             height: auto;
-            user-drag: none; /* ドラッグを無効化 */
+            margin: 20px;
+        }
+        .controls {
+            margin: 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+        .container {
+            overflow: auto;
+            scroll-snap-type: x mandatory;
+            display: flex;
+        }
+        section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            flex: none;
         }
     </style>
 </head>
 <body>
-    <div class="gallery">
-        <div class="gallery-inner">
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp" alt="Image 3">
-            <!-- 追加の画像をここに挿入 -->
-        </div>
+    <!-- コントロールパネル -->
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
+        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
     </div>
 
-    <script>
-        const galleryInner = document.querySelector('.gallery-inner');
-        let startX, currentX, currentIndex = 0;
 
-        galleryInner.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        galleryInner.addEventListener('touchmove', (e) => {
-            currentX = e.touches[0].clientX;
-        });
-
-        galleryInner.addEventListener('touchend', () => {
-            const diff = startX - currentX;
-            if (diff > 50) {
-                // 左にスワイプ
-                currentIndex++;
-            } else if (diff < -50) {
-                // 右にスワイプ
-                currentIndex--;
-            }
-
-            // インデックスの範囲を制限
-            currentIndex = Math.max(0, Math.min(currentIndex, galleryInner.children.length - 1));
-            galleryInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        });
-    </script>
 </body>
 </html>
