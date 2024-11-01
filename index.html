@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-    <div class="gallery">
+    <div class="section">
         <div class="gallery-inner">
             <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
             <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
@@ -32,32 +32,5 @@
             <!-- 追加の画像をここに挿入 -->
         </div>
     </div>
-    <script>
-        const galleryInner = document.querySelector('.gallery-inner');
-        let startX, currentX, currentIndex = 0;
-
-        galleryInner.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        galleryInner.addEventListener('touchmove', (e) => {
-            currentX = e.touches[0].clientX;
-        });
-
-        galleryInner.addEventListener('touchend', () => {
-            const diff = startX - currentX;
-            if (diff > 5) {
-                // 左にスワイプ
-                currentIndex++;
-            } else if (diff < -5) {
-                // 右にスワイプ
-                currentIndex--;
-            }
-
-            // インデックスの範囲を制限
-            currentIndex = Math.max(0, Math.min(currentIndex, galleryInner.children.length - 1));
-            galleryInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        });
-    </script>
 </body>
 </html>
