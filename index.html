@@ -59,17 +59,6 @@
 
     <h1>新風祭パンフレット</h1>
 
-    <!-- 画像を表示するエリア -->
-    <img id="photo" src="" alt="写真表示" />
-
-    <!-- コントロールパネル -->
-    <div class="controls">
-        <button onclick="previousPage()">前へ</button>
-        <input type="number" id="pageInput" min="1" max="64" placeholder="ページ番号" />
-        <button onclick="goToPage()">移動</button>
-        <button onclick="nextPage()">次へ</button>
-    </div>
-
     <div class="slider-x">
         <div>子要素1</div>
         <div>子要素2</div>
@@ -78,50 +67,6 @@
         <div>子要素5</div>
     </div>
 
-    <!-- ページ番号表示 -->
-    <p id="pageNumber"></p>
-
-    <script>
-        const totalPages = 64; // 全ページ数
-        let currentPage = 1;   // 初期ページ
-
-        // 画像を更新する関数
-        function updatePhoto() {
-            const formattedPage = String(currentPage).padStart(2, '0');
-            const photoSrc = `https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/${formattedPage}.webp` ;
-            document.getElementById('photo').src = photoSrc;
-            document.getElementById('pageNumber').innerText = `ページ ${currentPage} / ${totalPages}`;
-        }
-
-        // 次のページへ
-        function nextPage() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                updatePhoto();
-            }
-        }
-
-        // 前のページへ
-        function previousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                updatePhoto();
-            }
-        }
-
-        // 特定のページへ移動
-        function goToPage() {
-            const pageInput = document.getElementById('pageInput').value;
-            const pageNumber = parseInt(pageInput);
-            if (pageNumber >= 1 && pageNumber <= totalPages) {
-                currentPage = pageNumber;
-                updatePhoto();
-            } else {
-                alert("1から64までの有効なページ番号を入力してください。");
-            }
-        }
-        // 初期ページを設定
-        updatePhoto();
     </script>
 </body>
 </html>
