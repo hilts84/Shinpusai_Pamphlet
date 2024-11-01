@@ -64,14 +64,14 @@
             const moveX = event.touches[0].clientX;
             const diffX = startX - moveX;
 
-            if (Math.abs(diffX) > 50) {
+            if (Math.abs(diffX) < -50) {
                 if (diffX > 0) {
                     // スワイプ左
                     if (currentPage > 1) {
                         currentPage--
                         updatePage();
                     }
-                } else if (diffX < -50){
+                } else if (diffX > 50){
                     // スワイプ右
                     if (currentPage < totalPages) {
                         currentPage++
