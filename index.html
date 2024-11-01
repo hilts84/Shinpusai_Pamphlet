@@ -18,7 +18,7 @@
 
     <p id="pageNumber"></p>
 
-    
+
     <script>
         let lastScrollLeft = 0;
         const totalPages = 64; // 全ページ数
@@ -26,7 +26,7 @@
 
         function updatePhoto() {
             const formattedPage = String(currentPage).padStart(2, '0');
-            const photoSrc = `https://raw.githubusercontent.com/Kento210/ShinpuFestival_Brochure/refs/heads/main/webp/${formattedPage}.webp`;
+            const photoSrc = `https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/${formattedPage}.webp`;
             document.getElementById('photo').src = photoSrc;
             document.getElementById('pageNumber').innerText = `ページ ${currentPage} / ${totalPages}`;
         }
@@ -56,6 +56,8 @@
         }
 
         lastScrollLeft = scrollLeft;
+
+        updatePhoto();
     });
     </script>
 
