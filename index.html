@@ -29,7 +29,7 @@
 </head>
 <body>
     <img id="photo" src="" alt="写真表示" />
-    
+
     <div class="gallery">
         <div class="gallery-wrapper">
             <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
@@ -65,12 +65,16 @@
             if (Math.abs(diffX) > 50) {
                 if (diffX > 0) {
                     // スワイプ左
-                    currentPage--
-                    updatePage();
+                    if (currentPage < totalPages) {
+                        currentPage--
+                        updatePage();
+                    }
                 } else if (diffX < -50){
                     // スワイプ右
-                    currentPage++
-                    updatePage();
+                    if (currentPage > 1) {
+                        currentPage++
+                        updatePage();
+                    }
                 }
                 updatePage();
                 document.removeEventListener('touchmove', touchMove);
