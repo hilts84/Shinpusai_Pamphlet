@@ -3,56 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>写真ビューア</title>
+    <title>スクロールスナップ画像</title>
     <style>
         body {
+            margin: 0;
+            overflow: hidden; /* スクロールバーを隠す */
+        }
+        .scroll-container {
             display: flex;
-            align-items: center;
-            font-family: Arial, sans-serif;
+            overflow-x: scroll; /* 横スクロールを可能にする */
+            scroll-snap-type: x mandatory; /* スクロールスナップを有効にする */
+            width: 100vw; /* ビューポートの幅 */
+            height: 100vh; /* ビューポートの高さ */
+            scroll-behavior: smooth; /* スムーズスクロール */
         }
-        img {
-            max-width: 80%;
-            height: auto;
-            margin: 20px;
-        }
-        .controls {
-            margin: 10px;
-        }
-        button {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 16px;
-        }
-        .container {
-            overflow: auto;
-            scroll-snap-type: x mandatory;
-            display: flex;
-        }
-        section {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            flex: none;
-            max-width: 100%;
-            height: auto;
+        .scroll-container img {
+            height: 100%; /* 画像の高さをコンテナに合わせる */
+            scroll-snap-align: start; /* スナップ位置を画像の開始位置に設定 */
+            margin-right: 10px; /* 画像間のスペース */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <section>
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
-        </section>
-        <section>
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
-        </section>
-        <section>
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp" alt="Image 3">
-        </section>
-        <section>
-            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/04.webp" alt="Image 4">
-        </section>
-    </div>
 
+<div class="scroll-container">
+    <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
+    <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
+    <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp" alt="Image 3">
+    <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/04.webp" alt="Image 4">
+</div>
 
 </body>
 </html>
