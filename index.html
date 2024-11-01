@@ -15,13 +15,33 @@
 </head>
 <body>
     <h1>新風祭パンフレット</h1>
+
+    <p id="pageNumber"></p>
+
+    
     <script>
         let lastScrollLeft = 0;
+        const totalPages = 64; // 全ページ数
+        let currentPage = 1;   // 初期ページ
+
+        function updatePhoto() {
+            const formattedPage = String(currentPage).padStart(2, '0');
+            const photoSrc = `https://raw.githubusercontent.com/Kento210/ShinpuFestival_Brochure/refs/heads/main/webp/${formattedPage}.webp`;
+            document.getElementById('photo').src = photoSrc;
+            document.getElementById('pageNumber').innerText = `ページ ${currentPage} / ${totalPages}`;
+        }
+
         function onScrollRight() {
-            console.log("RRR");
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePhoto();
+            }
         }
         function onScrollLeft() {
-            console.log("LLL");
+            if (currentPage > 1) {
+                currentPage--;
+                updatePhoto();
+            }
         }
 
         window.addEventListener('scroll', () => {
