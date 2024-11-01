@@ -14,18 +14,16 @@
         img {
             max-width: 100%;
             margin: auto;
-            user-drag: none;
         }
 
         .section {
             display: flex;
-            overflow: auto;
-            scroll-snap-type: x;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
         }
 
         .section__item {
             scroll-snap-align: start;
-            scroll-snap-stop: normal;
         }
 
     </style>
