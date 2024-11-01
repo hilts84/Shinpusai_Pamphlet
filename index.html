@@ -3,34 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新風祭パンフレット</title>
+    <title>画像スワイプギャラリー</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px;
+        .gallery {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
         }
 
-        .containter {
-            overflow: auto;
-            scroll-snap-type: x mandatory;
+        .gallery-inner {
             display: flex;
-            scroll-snap-align: center;
+            transition: transform 0.3s ease;
         }
 
+        .gallery img {
+            width: 100%;
+            max-width: 300px; /* 画像の最大幅を指定 */
+            height: auto;
+            user-drag: none; /* ドラッグを無効化 */
+        }
     </style>
 </head>
 <body>
-    <div class="containter">
-        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
-        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
-        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp" alt="Image 3">
-        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/04.webp" alt="Image 4">
-        <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/05.webp" alt="Image 5">
+    <div class="gallery">
+        <div class="gallery-inner">
+            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
+            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp" alt="Image 2">
+            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp" alt="Image 3">
+            <!-- 追加の画像をここに挿入 -->
+        </div>
     </div>
+    <script>
+        const galleryInner = document.querySelector('.gallery-inner');
+        let startX, currentX, currentIndex = 0;
+
+        galleryInner.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        galleryInner.addEventListener('touchmove', (e) => {
+            currentX = e.touches[0].clientX;
+        });
+
+        galleryInner.addEventListener('touchend', () => {
+            const diff = startX - currentX;
+            if (diff > 50) {
+                // 左にスワイプ
+                currentIndex++;
+            } else if (diff < -50) {
+                // 右にスワイプ
+                currentIndex--;
+            }
+
+            // インデックスの範囲を制限
+            currentIndex = Math.max(0, Math.min(currentIndex, galleryInner.children.length - 1));
+            galleryInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+    </script>
 </body>
 </html>
