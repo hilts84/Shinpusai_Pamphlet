@@ -19,11 +19,26 @@
     <h1>新風祭パンフレット</h1>
 
     <script>
-        function onScroll() {
-            console.log("GOT IT");
+        function onScrollRight() {
+            console.log("RRR");
+        }
+        function onScrollLeft() {
+            console.log("LLL");
         }
 
-        window.addEventListener('scroll', onScroll);
+        window.addEventListener('scroll', () => {
+        const scrollLeft = window.scrollX;
+
+        if (scrollLeft > lastScrollLeft) {
+            // 右にスクロール
+            onScrollRight();
+        } else {
+            // 左にスクロール
+            onScrollLeft();
+        }
+
+        lastScrollLeft = scrollLeft;
+    });
     </script>
 </body>
 </html>
