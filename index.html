@@ -5,7 +5,10 @@
     <meta name="viewport" content="width+device-width, initial-scale 1.0">
     <title>新風祭パンフレット</title>
     <style>
-
+        body {
+            width: 2000px; /* 横にスクロールできるように広く設定 */
+            height: 100vh;
+        }
         img {
             max-width: 100%;
             height: auto;
@@ -27,7 +30,7 @@
             console.log("GOT IT");
         }
 
-        window.addEventListener("scroll", onScroll);
+        window.addEventListener('scroll', onScroll);
     </script>
 </body>
 </html>
