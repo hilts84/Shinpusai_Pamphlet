@@ -53,10 +53,10 @@
 
         galleryInner.addEventListener('touchend', () => {
             const diff = startX - currentX;
-            if (diff > 10) {
+            if (diff > 5) {
                 // 左にスワイプ
                 currentIndex++;
-            } else if (diff < -10) {
+            } else if (diff < -5) {
                 // 右にスワイプ
                 currentIndex--;
             }
