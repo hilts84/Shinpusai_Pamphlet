@@ -3,75 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新風祭パンフレット</title>
+    <title>画像スワイプギャラリー</title>
     <style>
         body {
-            display: flex;
-            /* flex-direction: column; */
-            flex-direction: column;
-            align-items: center;
+            margin: 0;
             font-family: Arial, sans-serif;
         }
-        img { 
-            /* max-width: 80%; */
-            max-width: 100%;
+
+        .gallery {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .gallery-inner {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img {
+            width: 100%;
+            max-width: 300px; /* 画像の最大幅を指定 */
             height: auto;
-            /*margin: 20px; */
-            margin: 20px;
-
+            user-drag: none; /* ドラッグを無効化 */
         }
-        .controls {
-            margin: 10px;
-        }
-        button {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 16px;
-        }
-
-        .slider-x{
-            scroll-snap-type: x mandatory;
-            width: 100%;
-            overflow-x: scroll;
-            display: flex;
-            -webkit-overflow-scrolling: touch; /* スマホ対応のため必須 */
-            overflow-scrolling: touch; /* スマホ対応のため必須 */
-        }
-
-        .slider-x > div{
-            /* 以下の設定は必須 */
-            scroll-snap-align: center;
-            height: 100%;
-            width: 100%;
-            flex: none;
-            scroll-snap-stop: normal;
-
-            /* 以下デモ用のデザイン */
-            color: #FFF;
-            font-size: 150%;
-            font-weight: bold;
-            /* 文字の上下左右中央寄せのための記述 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slider-x > div:nth-child(1){background-color: #C7000B}
-        .slider-x > div:nth-child(2){background-color: #D28300}
-
     </style>
 </head>
 <body>
-
-    <div class="slider-x"> 
-        <div>子要素1</div>
-        <div>子要素2</div>
+    <div class="gallery">
+        <div class="gallery-inner">
+            <img src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="Image 1">
+            <img src="image2.jpg" alt="Image 2">
+            <img src="image3.jpg" alt="Image 3">
+            <!-- 追加の画像をここに挿入 -->
+        </div>
     </div>
-
     <script>
-        const totalPages = 64; // 全ページ数
-        let currentPage = 1;   // 初期ページ
-    </script>
+        const galleryInner = document.querySelector('.gallery-inner');
+        let startX, currentX, currentIndex = 0;
 
+        galleryInner.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        galleryInner.addEventListener('touchmove', (e) => {
+            currentX = e.touches[0].clientX;
+        });
+
+        galleryInner.addEventListener('touchend', () => {
+            const diff = startX - currentX;
+            if (diff > 50) {
+                // 左にスワイプ
+                currentIndex++;
+            } else if (diff < -50) {
+                // 右にスワイプ
+                currentIndex--;
+            }
+
+            // インデックスの範囲を制限
+            currentIndex = Math.max(0, Math.min(currentIndex, galleryInner.children.length - 1));
+            galleryInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+    </script>
 </body>
 </html>
