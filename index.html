@@ -34,12 +34,14 @@
         function onScrollRight() {
             if (currentPage < totalPages) {
                 currentPage++;
+                console.log("RRR")
                 updatePhoto();
             }
         }
         function onScrollLeft() {
             if (currentPage > 1) {
                 currentPage--;
+                console.log("LLL")
                 updatePhoto();
             }
         }
