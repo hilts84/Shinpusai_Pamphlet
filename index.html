@@ -8,10 +8,9 @@
         body {
             display: flex;
             /* flex-direction: column; */
-            flex-direction: scroll;
+            flex-direction: column;
             align-items: center;
             font-family: Arial, sans-serif;
-            -webkit-overflow-scrolling: touch;
         }
         img { 
             /* max-width: 80%; */
@@ -29,6 +28,25 @@
             padding: 10px 15px;
             font-size: 16px;
         }
+
+        .slider-x{
+            scroll-snap-type: x mandatory;
+            width: 100%;
+            overflow-x: scroll;
+            display: flex;
+            -webkit-overflow-scrolling: touch; /* スマホ対応のため必須 */
+            overflow-scrolling: touch; /* スマホ対応のため必須 */
+        }
+
+        .slider-x > div{
+            /* 以下の設定は必須 */
+            scroll-snap-align: center;
+            height: 100%;
+            width: 100%;
+            flex: none;
+        }
+
+
     </style>
 </head>
 <body>
