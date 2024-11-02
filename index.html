@@ -14,8 +14,8 @@
 
         .image-container {
             display: inline-block; /* インラインブロックで横に並べる */
-            width: 100vw; /* 画面の幅に合わせる */
-            height: 100vh; /* 画面の高さに合わせる */
+            width: 100%; /* 画面の幅に合わせる */
+            height: 100%; /* 画面の高さに合わせる */
         }
 
         .image-container img {
@@ -25,8 +25,8 @@
 
         .content {
             display: inline-block; /* インラインブロックで横に並べる */
-            width: 100vw; /* 画面の幅に合わせる */
-            height: 100vh; /* 画面の高さに合わせる */
+            width: 100%; /* 画面の幅に合わせる */
+            height: 100%; /* 画面の高さに合わせる */
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
@@ -36,17 +36,11 @@
 <body>
     <div class="image-container">
         <img id="scrollImage" src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="画像1">
-        
-    </div>
-    <div class="content">
-        <h1>横にスクロールしてください</h1>
-        <p>コンテンツを追加して横スクロールすることで画像が切り替わります。</p>
-        
+
     </div>
 
     <script>
         const images = [
-            'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp',
             'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp',
             'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp'
         ];
