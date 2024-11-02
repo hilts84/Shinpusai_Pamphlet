@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新風祭パンフレット</title>
+    <title>横スクロールで画像切り替え</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            overflow-x: scroll; /* 横スクロールを有効にする */
+            white-space: nowrap; /* 子要素を横並びにする */
         }
 
         .image-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            display: inline-block; /* インラインブロックで横に並べる */
+            width: 100vw; /* 画面の幅に合わせる */
+            height: 100vh; /* 画面の高さに合わせる */
         }
 
         .image-container img {
@@ -25,38 +24,41 @@
         }
 
         .content {
-            position: relative;
-            z-index: 1;
+            display: inline-block; /* インラインブロックで横に並べる */
+            width: 100vw; /* 画面の幅に合わせる */
+            height: 100vh; /* 画面の高さに合わせる */
             padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="image-container">
         <img id="scrollImage" src="https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp" alt="画像1">
-        
     </div>
     <div class="content">
-        <h1>スクロールしてください</h1>
-        <p>コンテンツを追加してスクロールすることで画像が切り替わります。</p>
-        <div style="height: 2000px;"></div> <!-- スクロール用のスペース -->
+        <h1>横にスクロールしてください</h1>
+        <p>コンテンツを追加して横スクロールすることで画像が切り替わります。</p>
+        <div style="height: 150vh;"></div> <!-- スクロール用のスペース -->
     </div>
+
     <script>
         const images = [
             'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp',
             'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp',
-            'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp',
+            'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp'
         ];
 
         const scrollImage = document.getElementById('scrollImage');
 
         window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const docHeight = document.body.offsetHeight;
+            const scrollLeft = window.scrollX;
+            const windowWidth = window.innerWidth;
+            const docWidth = document.body.scrollWidth;
 
             // 現在のスクロール位置に基づいて画像を切り替え
-            const index = Math.floor((scrollTop / (docHeight - windowHeight)) * images.length);
+            const index = Math.floor((scrollLeft / (docWidth - windowWidth)) * images.length);
             
             if (index < images.length) {
                 scrollImage.src = images[index];
