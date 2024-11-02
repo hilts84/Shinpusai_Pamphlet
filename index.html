@@ -3,80 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新風祭パンフレット</title>
+    <title>スクロールで画像切り替え</title>
     <style>
         body {
             margin: 0;
-            align-items: center;
             font-family: Arial, sans-serif;
         }
 
-        .gallery {
-            overflow: hidden;
+        .image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            position: relative;
+            height: 100%;
+            overflow: hidden;
         }
 
-        .gallery-wrapper {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery img {
-            max-width: 100%;
+        .image-container img {
+            width: 100%;
             height: auto;
-            margin: 20px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <img id="photo" src="" alt="写真表示" />
-
+    <div class="image-container">
+        <img id="scrollImage" src="image1.jpg" alt="画像1">
+    </div>
+    <div class="content">
+        <h1>スクロールしてください</h1>
+        <p>コンテンツを追加してスクロールすることで画像が切り替わります。</p>
+        <div style="height: 2000px;"></div> <!-- スクロール用のスペース -->
+    </div>
     <script>
-        const totalPages = 64; // 全ページ数
-        let currentPage = 1;   // 初期ページ
+        const images = [
+            'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/01.webp',
+            'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/02.webp',
+            'https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/03.webp',
+        ];
 
-        const images = document.querySelectorAll('.gallery img');
+        const scrollImage = document.getElementById('scrollImage');
 
-        function updatePhoto() {
-            const formattedPage = String(currentPage).padStart(2, '0');
-            const photoSrc = `https://raw.githubusercontent.com/hilts84/Shinpusai_Pamphlet/refs/heads/main/webp/${formattedPage}.webp`;
-            document.getElementById('photo').src = photoSrc;
-        }
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.body.offsetHeight;
 
-        let startX = 0;
-
-        function touchStart(event) {
-            startX = event.touches[0].clientX;
-        }
-
-        function touchMove(event) {
-            const moveX = event.touches[0].clientX;
-            const diffX = startX - moveX;
-
-            if (Math.abs(diffX) < -50) {
-                if (diffX > 0) {
-                    // スワイプ左
-                    if (currentPage > 1) {
-                        currentPage--
-                        updatePage();
-                    }
-                } else if (diffX > 50){
-                    // スワイプ右
-                    if (currentPage < totalPages) {
-                        currentPage++
-                        updatePage();
-                    }
-                }
-                updatePage();
-                document.removeEventListener('touchmove', touchMove);
+            // 現在のスクロール位置に基づいて画像を切り替え
+            const index = Math.floor((scrollTop / (docHeight - windowHeight)) * images.length);
+            
+            if (index < images.length) {
+                scrollImage.src = images[index];
             }
-        }
-
-        document.querySelector('.gallery').addEventListener('touchstart', touchStart);
-        document.querySelector('.gallery').addEventListener('touchmove', touchMove);
-
-        updatePage();
+        });
     </script>
 </body>
 </html>
