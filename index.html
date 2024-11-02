@@ -71,11 +71,8 @@
             const windowWidth = window.innerWidth;
             const docWidth = document.body.scrollWidth;
 
-            
-
-            
             // スクロール位置を低く設定
-            const index = Math.floor((scrollLeft / (docWidth - windowWidth)) * (images.length - 1));
+            const index = Math.floor((scrollLeft / (docWidth - windowWidth)) * (images.length - 2));
             
             if (index < images.length && index >= 0) {
                 scrollImage.src = images[index];
