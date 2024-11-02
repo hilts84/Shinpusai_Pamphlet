@@ -46,7 +46,7 @@
         .section3 { background: lightblue; }
         .section4 { background: lightgreen; }
         .section5 { background: lightcoral; }
-        
+
 
     </style>
 </head>
@@ -85,7 +85,10 @@
                 scrollImage.src = images[index];
             }
 
-
+            // 2秒間操作を停止
+            setTimeout(() => {
+                isScrolling = false; // スクロール可能に戻す
+            }, 1000);
 
         });
     </script>
