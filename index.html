@@ -71,12 +71,18 @@
             const windowWidth = window.innerWidth;
             const docWidth = document.body.scrollWidth;
 
-            // 現在のスクロール位置に基づいて画像を切り替え
-            const index = Math.floor((scrollLeft / (docWidth - windowWidth)) * images.length);
             
-            if (index < images.length) {
+
+            
+            // スクロール位置を低く設定
+            const index = Math.floor((scrollLeft / (docWidth - windowWidth)) * (images.length - 1));
+            
+            if (index < images.length && index >= 0) {
                 scrollImage.src = images[index];
             }
+
+
+
         });
     </script>
 </body>
